@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
     function renderDescriptions() {
-
         desc09.value = localStorage.getItem("desc09");
         desc10.value = localStorage.getItem("desc10");
         desc11.value = localStorage.getItem("desc11");
@@ -115,8 +114,6 @@ $(document).ready(function () {
             $("#desc17").attr("class","future col-8 description");
         }
         if (curhour == 17){
-            console.log({curhour});
-
             $("#desc09").attr("class","past col-8 description");
             $("#desc10").attr("class","past col-8 description");
             $("#desc11").attr("class","past col-8 description");
