@@ -13,3 +13,5 @@ Clicking on the save button will store the time and user input in `localStorage`
 Near the top of the calendar, the application should display the current day. Additionally, each hour is color coded to reflect whether the time slot is in the past, the present, or the future. This will change depending on the time of day.
 
 Used the [Moment.js](https://momentjs.com/) library to work with date and time.
+
+Used icon fa-save from font awsome ("https://use.fontawesome.com/releases/v5.8.1/css/all.css")
