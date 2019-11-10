@@ -135,36 +135,22 @@ $(document).ready(function () {
             $("#desc16").attr("class","past col-8 description");
             $("#desc17").attr("class","past col-8 description");
         }
+        $("#btn-09").attr("data-hour","09");
+        $("#btn-10").attr("data-hour","10");
+        $("#btn-11").attr("data-hour","11");
+        $("#btn-12").attr("data-hour","12");
+        $("#btn-13").attr("data-hour","13");
+        $("#btn-14").attr("data-hour","14");
+        $("#btn-15").attr("data-hour","15");
+        $("#btn-16").attr("data-hour","16");
+        $("#btn-17").attr("data-hour","17");
     }
 
     renderDescriptions();
 
-    $("#btn-09").on("click", function () {
-        localStorage.setItem("desc09", desc09.value);
+    $('button').on("click", function(){
+        event.preventDefault();
+        var key = "desc" + $(this).attr("data-hour");
+        localStorage.setItem(key, $("#" + key).val());
     });
-    $("#btn-10").on("click", function () {
-        localStorage.setItem("desc10", desc10.value);
-    });
-    $("#btn-11").on("click", function () {
-        localStorage.setItem("desc11", desc11.value);
-    });
-    $("#btn-12").on("click", function () {
-        localStorage.setItem("desc12", desc12.value);
-    });
-    $("#btn-13").on("click", function () {
-        localStorage.setItem("desc13", desc13.value);
-    });
-    $("#btn-14").on("click", function () {
-        localStorage.setItem("desc14", desc14.value);
-    });
-    $("#btn-15").on("click", function () {
-        localStorage.setItem("desc15", desc15.value);
-    });
-    $("#btn-16").on("click", function () {
-        localStorage.setItem("desc16", desc16.value);
-    });
-    $("#btn-17").on("click", function () {
-        localStorage.setItem("desc17", desc17.value);
-    });
-
 });
