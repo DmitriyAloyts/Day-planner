@@ -20,101 +20,72 @@
     <p id="currentDay" class="lead"></p>
   </header>
   <div class="container">
-    <div class="row time-block">
-      <div class="col hour">
-        9AM
-      </div>
-      <textarea class="col-8 description" id="desc09">
-      </textarea>
-      <button class="col saveBtn" id="btn-09">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        10AM
-      </div>
-      <textarea class="col-8 description" id="desc10">
-        </textarea>
-      <button class="col saveBtn" id="btn-10">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        11AM
-      </div>
-      <textarea class="col-8 description" id="desc11">
-          </textarea>
-      <button class="col saveBtn" id="btn-11">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        12PM
-      </div>
-      <textarea class="col-8 description" id="desc12">
-            </textarea>
-      <button class="col saveBtn" id="btn-12">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        1PM
-      </div>
-      <textarea class="col-8 description" id="desc13">
-              </textarea>
-      <button class="col saveBtn" id="btn-13">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        2PM
-      </div>
-      <textarea class="col-8 description" id="desc14">
-                </textarea>
-      <button class="col saveBtn" id="btn-14">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        3PM
-      </div>
-      <textarea class="col-8 description" id="desc15">
-                  </textarea>
-      <button class="col saveBtn" id="btn-15">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        4PM
-      </div>
-      <textarea class="col-8 description" id="desc16">
-                    </textarea>
-      <button class="col saveBtn" id="btn-16">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-    <div class="row time-block">
-      <div class="col hour">
-        5PM
-      </div>
-      <textarea class="col-8 description" id="desc17">
-                      </textarea>
-      <button class="col saveBtn" id="btn-17">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    $(document).ready(function () {
+      var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+      $("#currentDay").text(moment().format('dddd, MMMM Do')); // Wednesday November 6th 
+      var curhour = moment().format('HH');
+
+      for (var i = 0; i < hours.length; i++) {
+
+
+        var timeBlock = $("<div>");
+        timeBlock.empty();
+        timeBlock.addClass("row time-block");
+        timeBlock.attr("id", "timeBlock" + hours[i]);
+
+        var hourEl = $("<div>");
+        hourEl.addClass("col-2 hour");
+        var hr = hours[i];
+        if (hours[i] < 12) {
+          hourEl.text(hr + "AM");
+        }
+        else {
+          if (hours[i] > 12) {
+            hr = hours[i] - 12
+          }
+          hourEl.text(hr + "PM");
+        }
+
+        timeBlock.append(hourEl);
+
+        var descEl = $("<textarea>");
+        descEl.addClass("col-8 description");
+        descEl.attr("id", "desc" + hours[i]);
+        descEl.val(localStorage.getItem("desc" + hours[i]));
+
+        if (curhour > hours[i]) {
+          descEl.addClass("past");
+        }
+        else if (curhour == hours[i]) {
+          descEl.addClass("present");
+        }
+        else {
+          descEl.addClass("future");
+        }
+        timeBlock.append(descEl);
+
+        var bttnEl = $("<button>");
+        bttnEl.addClass("col-2 saveBtn")
+        bttnEl.attr("data-hour", hours[i]);
+        var iconEl = $("<i>");
+        iconEl.addClass("fas fa-save");
+        bttnEl.append(iconEl);
+        timeBlock.append(bttnEl);
+
+        $(".container").append(timeBlock);
+      }
+      $('button').on("click", function () {
+        event.preventDefault();
+        var key = "desc" + $(this).attr("data-hour");
+        localStorage.setItem(key, $("#" + key).val());
+      });
+    });
+  </script>
 </body>
 
 </html>
